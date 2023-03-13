@@ -7,9 +7,17 @@ import { ProductComponent } from './components/product/product.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContentComponent } from './components/content/content.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductComponent, NavbarComponent, SidebarComponent, ContentComponent],
+  declarations: [
+    AppComponent,
+    ProductComponent,
+    NavbarComponent,
+    SidebarComponent,
+    ContentComponent,
+    DashboardComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
