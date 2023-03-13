@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductService, private fb: FormBuilder) {
     this.produitForm = this.fb.group({
       ref: ['', Validators.required],
-      quantite: [],
+      quantite: [''],
       prixUnit: [''],
     });
   }
