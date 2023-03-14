@@ -22,6 +22,27 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.productService.getProduits().subscribe(
+      (data) => {
+        this.products = data;
+      },
+      (error) => {
+        console.log('An error  was occured');
+      },
+      () => {
+        console.log('loading of products wa done');
+      }
+    );
+  }
+
+  addProduct() {
+    const p = this.produitForm.value;
+    this.productService.addProduct(p).subscribe((res) => {
+      this.loadProducts();
+    });
   }
 }
