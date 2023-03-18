@@ -13,6 +13,10 @@ export class ProductComponent implements OnInit {
 
   produitForm!: FormGroup;
 
+  operation: string = 'add';
+
+  selectedProduit!: Product;
+
   constructor(private productService: ProductService, private fb: FormBuilder) {
     this.produitForm = this.fb.group({
       ref: ['', Validators.required],
@@ -44,5 +48,15 @@ export class ProductComponent implements OnInit {
     this.productService.addProduct(p).subscribe((res) => {
       this.loadProducts();
     });
+  }
+
+  updateProduct() {
+    this.productService.updateProduct({}).subscribe((res) => {
+      this.loadProducts();
+    });
+  }
+
+  initProduit() {
+    this.selectedProduit = new Product();
   }
 }

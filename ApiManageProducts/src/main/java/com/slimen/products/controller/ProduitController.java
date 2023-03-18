@@ -3,6 +3,8 @@ package com.slimen.products.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.slimen.products.entities.Produit;
 import com.slimen.products.service.IProduitService;
 
+
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitController {
@@ -23,21 +26,29 @@ public class ProduitController {
 	private IProduitService produitService;
 	
 	@GetMapping
-	public List<Produit> getProduits(){
-		return produitService.getProduits();		
-	}
-	@PostMapping
-	public void addProduit(@RequestBody Produit produit) {
-		produitService.addProduit(produit);
+	public  ResponseEntity<List<Produit>> getProduits(){
+		List<Produit> produits =produitService.getProduits()
+;		return new  ResponseEntity<>(produits,HttpStatus.OK);		
 	}
 	
+	
+	@PostMapping
+	public ResponseEntity<Produit> addProduit(@RequestBody Produit produit) {
+        Produit  newProduit =produitService.addProduit(produit);
+        
+		return new  ResponseEntity<>(newProduit,HttpStatus.CREATED);
+	}
+	
+	
+	
 	@PutMapping
-	public void updateProduit(@RequestBody Produit produit) {
-		produitService.updateProduit(produit);
+	public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit) {
+         Produit updateProduit = produitService.updateProduit(produit);
+		return new  ResponseEntity<>(updateProduit,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{ref}")
-	public void deleteProduit(@PathVariable String ref) {
+	public void deleteProduit(@PathVariable("ref") String ref) {
 		produitService.deleteProduit(ref);
 	}
 

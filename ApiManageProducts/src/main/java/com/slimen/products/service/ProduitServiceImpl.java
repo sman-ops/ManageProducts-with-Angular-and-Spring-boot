@@ -3,41 +3,34 @@ package com.slimen.products.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.slimen.products.entities.Produit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.slimen.products.entities.Produit;
+import com.slimen.products.repository.ProduitRepo;
+
+@Service
 public class ProduitServiceImpl implements IProduitService {
 	
-	
-	
-	private List<Produit> produits;
-	
-	public ProduitServiceImpl() {
-		produits= new ArrayList<Produit>();
-		produits.add(new Produit("livre",39,33));
-		produits.add(new Produit("Style",3,33));
-		produits.add(new Produit("tablette",39,63));
-		
-	}
-	
-	
+   @Autowired
+   private ProduitRepo produitRepo;
 
 	@Override
 	public List<Produit> getProduits() {
 		// TODO Auto-generated method stub
-		return produits;
+		return produitRepo.findAll();
 	}
 
 	@Override
-	public void addProduit(Produit produit) {
-		produits.add(produit);
+	public Produit addProduit(Produit produit) {
+		return produitRepo.save(produit);
 		
 	}
 
 	@Override
-	public void updateProduit(Produit produit) {
+	public Produit updateProduit(Produit produit) {
 		
-		produits.remove(produit);
-		produits.add(produit);
+		 return produitRepo.save(produit);
 		
 		
 		
@@ -45,9 +38,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public void deleteProduit(String ref) {
-		Produit produit=new Produit();
-		produit.setRef(ref);
-		produits.remove(produit);
+		produitRepo.deleteById(ref);
 		
 	}
 

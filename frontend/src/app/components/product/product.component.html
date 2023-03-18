@@ -7,6 +7,15 @@
             <th>Ref</th>
             <th>Qté</th>
             <th>Prix unit</th>
+            <th>
+              <button
+                type="submit"
+                class="btn btn-outline-primary"
+                (click)="operation = 'add'"
+              >
+                Add
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +23,22 @@
             <td>{{ product.ref }}</td>
             <td>{{ product.quantite }}</td>
             <td>{{ product.prixUnitaire }}</td>
+            <td>
+              <button
+                type="submit"
+                class="btn btn-outline-primary"
+                (click)="operation = 'edit'"
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                class="btn btn-outline-Danger"
+                (click)="operation = 'remove'"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -21,7 +46,18 @@
 
     <div class="col-lg-5">
       <div class="card">
-        <div class="card-header info text-white">Add product</div>
+        <div class="card-header bg-info text-white">
+          {{
+            operation == "add"
+              ? "ajouter Produit"
+              : operation == "edit"
+              ? "modifier produit"
+              : operation == "remove"
+              ? "supprimer produit"
+              : ""
+          }}
+          Ajouter product
+        </div>
         <div class="card-body">
           <form [formGroup]="produitForm">
             <div class="form-group">
@@ -56,10 +92,16 @@
             </div>
             <button
               type="submit"
-              class="btn btn-success"
-              (click)="addProduct()"
+              class="btn btn-outline-primary"
+              (click)="operation == 'add' ? addProduct() : updateProduct()"
             >
-              ADD product
+              {{
+                operation == "add"
+                  ? "ajouter"
+                  : operation == "edit"
+                  ? "modifier"
+                  : ""
+              }}
             </button>
           </form>
         </div>
