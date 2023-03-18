@@ -17,21 +17,29 @@ export class ProductComponent implements OnInit {
 
   selectedProduit!: Product;
 
-  constructor(private productService: ProductService, private fb: FormBuilder) {
+  constructor(
+    private productService: ProductService,
+    private fb: FormBuilder
+  ) {}
+
+  createForm() {
     this.produitForm = this.fb.group({
       ref: ['', Validators.required],
       quantite: [''],
-      prixUnit: [''],
+      prixUnitaire: [''],
     });
   }
 
   ngOnInit(): void {
     this.loadProducts();
+    this.initProduit();
+    this.createForm();
   }
 
   loadProducts() {
     this.productService.getProduits().subscribe(
       (data) => {
+        console.log(data);
         this.products = data;
       },
       (error) => {
@@ -45,6 +53,7 @@ export class ProductComponent implements OnInit {
 
   addProduct() {
     const p = this.produitForm.value;
+    console.log(p);
     this.productService.addProduct(p).subscribe((res) => {
       this.loadProducts();
     });

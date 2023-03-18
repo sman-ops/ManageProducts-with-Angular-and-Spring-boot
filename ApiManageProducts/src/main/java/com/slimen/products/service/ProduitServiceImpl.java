@@ -17,7 +17,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public List<Produit> getProduits() {
-		// TODO Auto-generated method stub
+		
 		return produitRepo.findAll();
 	}
 
@@ -32,13 +32,11 @@ public class ProduitServiceImpl implements IProduitService {
 		
 		 return produitRepo.save(produit);
 		
-		
-		
 	}
 
 	@Override
-	public void deleteProduit(String ref) {
-		produitRepo.deleteById(ref);
+	public void deleteProduit(Long id) {
+		produitRepo.deleteById(id);
 		
 	}
 

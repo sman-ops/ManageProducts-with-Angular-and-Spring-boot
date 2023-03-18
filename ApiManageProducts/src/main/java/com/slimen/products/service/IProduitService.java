@@ -12,7 +12,7 @@ public interface IProduitService {
 	
 	Produit updateProduit(Produit produit);
 	
-	void deleteProduit(String ref);
+	void deleteProduit(Long id);
 	
 
 }

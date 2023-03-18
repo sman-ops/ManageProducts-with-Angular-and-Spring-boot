@@ -10,25 +10,18 @@ export class ProductService {
   private apiServerUrl = environment.apiBaseUrl;
   private Products: Product[] = [];
 
-  constructor(private http: HttpClient) {
-    let p1: Product = new Product('Livre', 10, 100);
-    let p2: Product = new Product('Style', 20, 300);
-    let p3: Product = new Product('cahier', 5, 130);
-    this.Products.push(p1);
-    this.Products.push(p2);
-    this.Products.push(p3);
-  }
+  constructor(private http: HttpClient) {}
 
   public getProducts(): Product[] {
     return this.Products;
   }
 
-  getProduits(): Observable<any> {
-    return this.http.get(`${this.apiServerUrl}`);
+  getProduits(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiServerUrl}`);
   }
 
-  addProduct(produit: Product): Observable<any> {
-    return this.http.post(`${this.apiServerUrl}`, produit);
+  addProduct(produit: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.apiServerUrl}/add`, produit);
   }
 
   updateProduct(produit: Product): Observable<any> {

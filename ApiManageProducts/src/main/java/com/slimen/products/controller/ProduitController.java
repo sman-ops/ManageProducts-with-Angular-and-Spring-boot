@@ -18,6 +18,8 @@ import com.slimen.products.entities.Produit;
 import com.slimen.products.service.IProduitService;
 
 
+
+
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitController {
@@ -32,7 +34,7 @@ public class ProduitController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<Produit> addProduit(@RequestBody Produit produit) {
         Produit  newProduit =produitService.addProduit(produit);
         
@@ -47,9 +49,9 @@ public class ProduitController {
 		return new  ResponseEntity<>(updateProduit,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{ref}")
-	public void deleteProduit(@PathVariable("ref") String ref) {
-		produitService.deleteProduit(ref);
+	@DeleteMapping("/{id}")
+	public void deleteProduit(@PathVariable("ref") Long id) {
+		produitService.deleteProduit(id);
 	}
 
 }

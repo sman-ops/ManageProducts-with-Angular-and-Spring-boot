@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 @Table(name="produit")
 public class Produit {
 	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String ref;
-	private  int quantie;
+	private  int quantite;
 	private  float prixUnitaire;
 
 }

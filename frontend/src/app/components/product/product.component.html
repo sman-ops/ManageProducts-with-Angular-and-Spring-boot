@@ -4,6 +4,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Ref</th>
             <th>Qté</th>
             <th>Prix unit</th>
@@ -11,7 +12,7 @@
               <button
                 type="submit"
                 class="btn btn-outline-primary"
-                (click)="operation = 'add'"
+                (click)="operation = 'add'; initProduit()"
               >
                 Add
               </button>
@@ -20,6 +21,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
             <td>{{ product.ref }}</td>
             <td>{{ product.quantite }}</td>
             <td>{{ product.prixUnitaire }}</td>
@@ -27,7 +29,7 @@
               <button
                 type="submit"
                 class="btn btn-outline-primary"
-                (click)="operation = 'edit'"
+                (click)="operation = 'edit'; selectedProduit = product"
               >
                 Edit
               </button>
@@ -62,7 +64,12 @@
           <form [formGroup]="produitForm">
             <div class="form-group">
               <label>Ref</label>
-              <input type="text" class="form-control" formControlName="ref" />
+              <input
+                type="text"
+                class="form-control"
+                formControlName="ref"
+                [(ngModel)]="selectedProduit.ref"
+              />
             </div>
             <div
               class="alert alert-danger"
@@ -80,6 +87,7 @@
                 type="text"
                 class="form-control"
                 formControlName="quantity"
+                [(ngModel)]="selectedProduit.quantite"
               />
             </div>
             <div class="form-group">
@@ -88,6 +96,7 @@
                 type="text"
                 class="form-control"
                 formControlName="prixUnit"
+                [(ngModel)]="selectedProduit.prixUnitaire"
               />
             </div>
             <button
